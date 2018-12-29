@@ -6,7 +6,47 @@ package syncutil
 import "sync/atomic"
 
 // /////////////////////////////////////////////////////////////////////////////
-// 对外 api
+// Int32 原子变量
+
+// int32 类型的 原子变量
+type AtomicInt32 int32
+
+// 原子性的将 v 的值保存到 *AtomicInt32
+func (ai *AtomicInt32) Store(v int32) {
+	atomic.StoreInt32((*int32)(ai), v)
+}
+
+// 原子性的将 delta 的值添加到 *AtomicInt32 并返回新值。
+func (ai *AtomicInt32) Add(delta int32) {
+	atomic.AddInt32((*int32)(ai), delta)
+}
+
+// 原子性的获取 *AtomicInt32 的值。
+func (ai *AtomicInt32) Load() int32 {
+	return atomic.LoadInt32((*int32)(ai))
+}
+
+// /////////////////////////////////////////////////////////////////////////////
+// Uint32 原子变量
+type AtomicUint32 uint32
+
+// 原子性的将 v 的值保存到 *AtomicUint32
+func (ui32 *AtomicUint32) Store(v uint32) {
+	atomic.StoreUint32((*uint32)(ui32), v)
+}
+
+// 原子性的将 delta 的值添加到 *AtomicUint32 并返回新值。
+func (ui32 *AtomicUint32) Add(delta uint32) {
+	atomic.AddUint32((*uint32)(ui32), delta)
+}
+
+// 原子性的获取 *AtomicUint32 的值。
+func (ui32 *AtomicUint32) Load() uint32 {
+	return atomic.LoadUint32((*uint32)(ui32))
+}
+
+// /////////////////////////////////////////////////////////////////////////////
+// int 原子变量
 
 // int 类型的 原子变量 （用 int64 表示的）
 type AtomicInt int64
@@ -26,6 +66,9 @@ func (ai *AtomicInt) Load() int {
 	return int(atomic.LoadInt64((*int64)(ai)))
 }
 
+// /////////////////////////////////////////////////////////////////////////////
+// int64 原子变量
+
 // int64 类型的 原子变量
 type AtomicInt64 int64
 
@@ -44,23 +87,8 @@ func (ai *AtomicInt64) Load() int64 {
 	return atomic.LoadInt64((*int64)(ai))
 }
 
-// int32 类型的 原子变量
-type AtomicInt32 int32
-
-// 原子性的将 v 的值保存到 *AtomicInt32
-func (ai *AtomicInt32) Store(v int32) {
-	atomic.StoreInt32((*int32)(ai), v)
-}
-
-// 原子性的将 delta 的值添加到 *AtomicInt32 并返回新值。
-func (ai *AtomicInt32) Add(delta int32) {
-	atomic.AddInt32((*int32)(ai), delta)
-}
-
-// 原子性的获取 *AtomicInt32 的值。
-func (ai *AtomicInt32) Load() int32 {
-	return atomic.LoadInt32((*int32)(ai))
-}
+// /////////////////////////////////////////////////////////////////////////////
+// bool 原子变量
 
 // bool 类型的 原子变量
 type AtomicBool AtomicInt
