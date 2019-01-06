@@ -87,6 +87,11 @@ func (ai *AtomicInt64) Load() int64 {
 	return atomic.LoadInt64((*int64)(ai))
 }
 
+// 将 v 与 原来的值交换，并返回原来的值
+func (ai *AtomicInt64) Swap(v int64) (old int64) {
+	return atomic.SwapInt64((*int64)(ai), v)
+}
+
 // /////////////////////////////////////////////////////////////////////////////
 // bool 原子变量
 
