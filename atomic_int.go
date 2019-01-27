@@ -48,6 +48,8 @@ func (this *AtomicInt32) CompareAndSwap(old int32, newv int32) bool {
 
 // /////////////////////////////////////////////////////////////////////////////
 // Uint32 原子变量
+
+// Uint32 原子变量
 type AtomicUint32 uint32
 
 // 原子性的获取 *AtomicUint32 的值。
@@ -88,7 +90,7 @@ func (this *AtomicUint32) CompareAndSwap(old uint32, newv uint32) bool {
 // /////////////////////////////////////////////////////////////////////////////
 // int64 原子变量
 
-// int64 类型的 原子变量
+// int64 原子变量
 type AtomicInt64 int64
 
 // 原子性的获取 *AtomicInt64 的值。
