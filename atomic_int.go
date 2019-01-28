@@ -129,6 +129,47 @@ func (this *AtomicInt64) CompareAndSwap(old int64, newv int64) bool {
 }
 
 // /////////////////////////////////////////////////////////////////////////////
+// uint64 原子变量
+
+// uint64 原子变量
+type AtomicUint64 uint64
+
+// 原子性的获取 *AtomicUint64 的值。
+func (this *AtomicUint64) Load() uint64 {
+	self := (*uint64)(this)
+
+	return atomic.LoadUint64(self)
+}
+
+// 原子性的将 v 的值保存到 *AtomicUint64
+func (this *AtomicUint64) Store(v uint64) {
+	self := (*uint64)(this)
+
+	atomic.StoreUint64(self, v)
+}
+
+// 原子性的将 delta 的值添加到 *AtomicUint64 并返回新值。
+func (this *AtomicUint64) Add(delta uint64) uint64 {
+	self := (*uint64)(this)
+
+	return atomic.AddUint64(self, delta)
+}
+
+// 将 v 与 原来的值交换，并返回原来的值
+func (this *AtomicUint64) Swap(v uint64) uint64 {
+	self := (*uint64)(this)
+
+	return atomic.SwapUint64(self, v)
+}
+
+// 将 AtomicUint64 的值与 old 进行比较，如果相等。则将 AtomicUint64 的值替换为 newv，并返回 true。否则返回 false
+func (this *AtomicUint64) CompareAndSwap(old uint64, newv uint64) bool {
+	self := (*uint64)(this)
+
+	return atomic.CompareAndSwapUint64(self, old, newv)
+}
+
+// /////////////////////////////////////////////////////////////////////////////
 // int 原子变量
 
 // int 类型的 原子变量 （用 int64 表示的）
